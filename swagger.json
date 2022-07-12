@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Boris Group LTD - Reports With Swagger",
+    "description": "Boris Group LTD - Reports With Swagger",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "tags": [
+    {
+      "name": "Reports",
+      "description": "API for reports in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/reports": {
+      "post": {
+        "tags": ["Reports"],
+        "description": "Create new report in system",
+        "parameters": [
+          {
+            "name": "report",
+            "in": "body",
+            "description": "Report that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New report is created",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get all reports in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        }
+      }
+    },
+    "/reports/{report_id}": {
+      "parameters": [
+        {
+          "name": "report_id",
+          "in": "path",
+          "required": true,
+          "description": "ID of report that we want to find",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get report with given ID",
+        "responses": {
+          "200": {
+            "description": "Report is found",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete report with given ID",
+        "tags": ["Reports"],
+        "responses": {
+          "200": {
+            "description": "Report is deleted",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update report with give ID",
+        "tags": ["Reports"],
+        "parameters": [
+          {
+            "name": "report",
+            "in": "body",
+            "description": "Report with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Report is updated",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Report": {
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "license_plate": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "driver_id": {
+          "type": "string"
+        },
+        "speed": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
